@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Setup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>[x-cloak] { display: none !important; }</style>
+</head>
+<body class="relative h-screen flex items-center justify-center">
+
+  <!-- Video Background -->
+  <video autoplay muted loop class="absolute left-0 w-full h-full object-cover -z-10">
+    <source src="video/username_background.mp4" type="video/mp4">
+  </video>
+
+  <!-- black birds -->
+  <iframe 
+    class="absolute w-full h-full z-20 pointer-events-none"
+    src="https://lottie.host/embed/3af5e298-594a-43ec-b462-152704031ecb/MiymmmLQM8.lottie">
+  </iframe>
+
+  <div x-data="{
+    difficulty: localStorage.getItem('difficulty') || null,
+    questionCount: null,
+    
+    selectDifficulty(level) {
+      this.difficulty = level;
+      localStorage.setItem('difficulty', level);
+    },
+    
+    selectQuestionCount(count) {
+      this.questionCount = count;
+      localStorage.setItem('questionCount', count);
+      window.location.href = 'quiz.php';
+    },
+    
+    resetSelection() {
+      this.difficulty = null;
+      this.questionCount = null;
+      localStorage.removeItem('difficulty');
+      localStorage.removeItem('questionCount');
+    }
+  }" x-cloak class="w-full max-w-md mx-auto">
+    
+    <!-- Difficulty Selection Screen -->
+    <div x-show="!difficulty" class="text-center bg-white p-8 rounded-lg shadow-lg bg-opacity-15">
+      <h1 class="text-2xl font-bold mb-6 text-white">Select Difficulty</h1>
+      <div class="space-y-4">
+        <button @click="selectDifficulty('easy')" class="w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
+          Easy
+        </button>
+        <button @click="selectDifficulty('medium')" class="w-full px-6 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition">
+          Medium
+        </button>
+        <button @click="selectDifficulty('hard')" class="w-full px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
+          Hard
+        </button>
+      </div>
+    </div>
+    
+    <!-- Question Count Selection Screen -->
+    <div x-show="difficulty && !questionCount" class="text-center bg-white p-8 rounded-lg shadow-lg bg-opacity-15">
+      <h1 class="text-2xl font-bold mb-2 text-white">Number of Questions</h1>
+      <p class="text-gray-600 mb-6 text-white">Difficulty: 
+        <span x-text="difficulty.charAt(0).toUpperCase() + difficulty.slice(1)" class="font-bold"></span>
+        <button @click="resetSelection()" class="ml-2 text-xs text-gray-300 hover:text-white">
+          (change)
+        </button>
+      </p>
+      <div class="space-y-4">
+        <button @click="selectQuestionCount(5)" class="w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
+          5 Questions
+        </button>
+        <button @click="selectQuestionCount(10)" class="w-full px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+          10 Questions
+        </button>
+        <button @click="selectQuestionCount(15)" class="w-full px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 transition">
+          15 Questions
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

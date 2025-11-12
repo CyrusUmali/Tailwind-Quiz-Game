@@ -1,0 +1,19 @@
+{
+    "name": "umali/tailwind_quiz_game",
+    "autoload": {
+        "psr-4": {
+            "Umali\\TailwindQuizGame\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Cyrus U. Carbungco",
+            "email": "umalic65@gmail.com"
+        }
+    ],
+    "require": {
+        "mongodb/mongodb": "^2.0",
+        "vlucas/phpdotenv": "^5.6",
+        "firebase/php-jwt": "^6.11"
+    }
+}
