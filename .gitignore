@@ -1,0 +1,18 @@
+# Node.js
+node_modules/
+
+# PHP Composer dependencies
+vendor/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Build output
+dist/
+build/
+
+# OS files
+.DS_Store
